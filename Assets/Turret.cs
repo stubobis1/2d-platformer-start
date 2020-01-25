@@ -13,6 +13,8 @@ public class Turret : MonoBehaviour
     public float FirePower = 500f;
     public float FireCooldown = 1f;
 
+    public float MinimumDistance = 35f;
+
     public bool AbleToFire = true;
     void Start()
     {
@@ -33,8 +35,11 @@ public class Turret : MonoBehaviour
 
         if (AbleToFire && Time.time > nextTimeToSwitch)
         {
-            nextTimeToSwitch = Time.time + FireCooldown;
-            Fire();
+            if (Vector2.Distance(Target.transform.position, this.transform.position) < MinimumDistance)
+            {
+                nextTimeToSwitch = Time.time + FireCooldown;
+                Fire();
+            }
         }
     }
 
