@@ -5,12 +5,14 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     public GameObject Explosion;
-
+    public float damage = 10f;
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.collider.CompareTag("Player"))
         {
             print("Player");
+            collision.collider.GetComponent<Player>().TakeHit(damage);
+
         }
 
 
